@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -30,15 +31,19 @@ button {
     border: none;
     border-radius: 5px;
     
-
 }
-
+button.active {
+    background-color: #347bff; 
+}
 button:hover {
     background-color: #ae63a2;
 }
 
- head,h1{
-    color: #f6fcf7;
-    height: 60vh;
+ .head{
+    color: #f8f7f7;
     text-align: center;
+    text-decoration: underline;
+    
 }
+
+
