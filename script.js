@@ -1,13 +1,40 @@
-document.getElementById('calculate').addEventListener('click', function() {
-    // Get input values
-    let num1 = parseFloat(document.getElementById('num1').value);
-    let num2 = parseFloat(document.getElementById('num2').value);
-    let operation = document.getElementById('operation').value;
-    
-    let result;
+// Get elements
+const num1Input = document.getElementById('num1');
+const num2Input = document.getElementById('num2');
+const operationButtons = document.querySelectorAll('#operation button');
+const resultDisplay = document.getElementById('result');
+const calculateButton = document.getElementById('calculate');
 
-    // Perform the chosen operation
-    switch(operation) {
+
+let selectedOperation = '';
+
+
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        
+        operationButtons.forEach(btn => btn.classList.remove('active'));
+
+        
+        selectedOperation = button.value;
+
+        
+        button.classList.add('active');
+    });
+});
+
+
+calculateButton.addEventListener('click', () => {
+    // Get the values from the inputs
+    const num1 = parseFloat(num1Input.value);
+    const num2 = parseFloat(num2Input.value);
+
+    if (isNaN(num1) || isNaN(num2)) {
+        resultDisplay.textContent = 'Please enter valid numbers';
+        return;
+    }
+    let result;
+  
+    switch (selectedOperation) {
         case 'add':
             result = num1 + num2;
             break;
@@ -18,16 +45,15 @@ document.getElementById('calculate').addEventListener('click', function() {
             result = num1 * num2;
             break;
         case 'divide':
-            if(num2 === 0) {
+            if (num2 === 0) {
                 result = 'Error: Cannot divide by zero';
             } else {
                 result = num1 / num2;
             }
             break;
         default:
-            result = 'Invalid operation';
+            result = 'Please select an operation';
     }
 
-    // Show result
-    document.getElementById('result').textContent = result;
+    resultDisplay.textContent = result;
 });
